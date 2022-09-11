@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SnailController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// REST Endpoint for getting all of the attempts made by the snail
+Route::get('/snailAttempts', [SnailController::class, 'index'])->name('snailAttemtps');
+
+// REST Endpoint for solving the snail problem with the given parameters and store the values in the database
+Route::put('/snailCheck', [SnailController::class, 'snailCheck'])->name('snailCheck');
