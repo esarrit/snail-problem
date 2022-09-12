@@ -42,14 +42,6 @@ class SnailController extends Controller
             'F' => $f,
             'result' => $resultString,
         ]);
-        //DB::table('snail_logs')->insert([
-         //   'DATE' => Carbon::now(),
-           // 'H' => $h,
-        //    'U' => $u,
-          //  'D' => $d,
-        //    'F' => $f,
-          //  'result' => $resultString,
-        //]);
     }
 
     /**
@@ -79,17 +71,22 @@ class SnailController extends Controller
 
         // Variables to determine solution
         $snailHeight = 0;
+        $uWithFatigue = $u;
         $dayCounter = 0;
         $resultString = '';
         $successFlag = false; 
 
         // Snail keeps trying until it escapes the well or fails by sliding all the way back
         while ($snailHeight >= 0 && $snailHeight <= $h) {
-            $snailHeight += $u;
-            $snailHeight -= $d;
-            if ($dayCounter > 0) {
-                $snailHeight -= $fatigueFactor;
+            // Progress during the day
+            $snailHeight += $uWithFatigue;
+            // Break loop if snail managed to escape 
+            if ($snailHeight <= $h) {       
+                // Account for distance that snail slides during the night
+                $snailHeight -= $d;
             }
+            // Keep track of fatigue and number of days 
+            $uWithFatigue -= $fatigueFactor;
             $dayCounter++;
         }
 
