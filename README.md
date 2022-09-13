@@ -1,64 +1,53 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# The Snail Problem
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A snail is at the bottom of a well of H height and wants to climb to the top. The snail can climb U feet while the sun is up, but slides down D feet at night while sleeping. The snail has a fatigue factor of F %, which means that on each successive day the snail climbs F % * H = W feet less than it did the previous day. The distance lost to fatigue is always F % of the *first\* day's climbing distance. All four numbers must be between 1 and 100, inclusive.
 
-## About Laravel
+Depending on the parameters of the problem, the snail will eventually either leave the well — Success — or slide back to the bottom of the well — Failure.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## About the App
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This app aims to solve the snail problem. It provides the solution as a RESTful web service that takes in the parameters of the problem and provides the solution as a string, which says if the snail succeeded or failed. This solution is facilitated by a User Interface (UI) hosted on the web, which can be found [here](https://snail-view.herokuapp.com/).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Architecture
 
-## Learning Laravel
+This application follows the Model-View-Controller (MVC) architectural design pattern. As the backend portion of the solution, this repository contains the Model and Controller pieces of the architecture. The View (frontend) can be found [here](https://github.com/esarrit/snail-problem-frontend).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Backend Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+This application was developed using the PHP web application framework, Laravel. It provides great tools for building robust applications and allows for the implementation of MVC patterns smoothly. See below for more detals.
 
-## Laravel Sponsors
+The database for this application is a PostgreSQL database instance hosted on [Heroku](https://www.heroku.com/).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### Relevant Files for the Model
 
-### Premium Partners
+-   [config/database.php](https://github.com/esarrit/snail-problem/blob/master/config/database.php): allows the database connection set up
+-   [Migrations file](https://github.com/esarrit/snail-problem/blob/master/database/migrations/2022_09_11_150648_create_snail_logs_table.php): defines the schema for the database and allows you to set up that schema with a php command after the database is configured
+-   [Seeders](https://github.com/esarrit/snail-problem/tree/master/database/seeders): populate your database with mock data for testing via a php command.
+-   [app/Models](https://github.com/esarrit/snail-problem/tree/master/app/Models): provides mapping for the database schema by leveraging Laravel's Eloquent ORM (obejct relational mapper). It works great out of the box and performs a lof of the heavy lifting related to database mapping and queries automatically.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### Relevant files for the Controller
 
-## Contributing
+-   [app/Http/Controllers](https://github.com/esarrit/snail-problem/tree/master/app/Http/Controllers): contains control logic. The endpoints of the RESTful service that will be reachable by outside parties (API) live here.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## API Specification
 
-## Code of Conduct
+### List the snail's attempts to escape the well
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+You can see a list of all the attempts the snail has made to escape the well, which includes the date, attempt parameters, and result.
 
-## Security Vulnerabilities
+`GET /api/snailAttempts`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Calculate the result of a snail escape attempt given a set of conditions
 
-## License
+You can provide the parameters for the snail to attempt escaping the well. The result will be calculated and returned to you. The parameters and its corresponding result will be stored in the database.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+`PUT /api/snailCheck`
+
+#### Parameters
+
+-   h: height of the well in feet
+-   u: distance in feet that the snail can climb during the day
+-   d: distance in feet that the snail slides down during the night
+-   f: fatigue factor expressed as a percentage
+
+All parameters are required. All parameters must be between 1 and 100, inclusive.

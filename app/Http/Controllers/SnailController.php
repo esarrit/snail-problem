@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\SnailLog;
 
+/**
+ * Defines the endpoints of the RESTful service that will be reachable by outside parties (API), such as the 
+ * frontend of the application or direct calls to the service. 
+ * 
+ */
 class SnailController extends Controller
 {
     /**
@@ -56,10 +61,10 @@ class SnailController extends Controller
      */
     public function snailCheck(Request $request) {
         $request->validate([
-            'h' => 'required',
-            'u' => 'required',
-            'd' => 'required',
-            'f' => 'required',
+            'h' => 'required|numeric|min:1|max:100',
+            'u' => 'required|numeric|min:1|max:100',
+            'd' => 'required|numeric|min:1|max:100',
+            'f' => 'required|numeric|min:1|max:100',
         ]);
 
         // Problem parameters

@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 use App\Models\SnailLog;
 use Carbon\Carbon;
 
+/**
+ * The SnailLogTableSeeder populates the database table with pre-determined mock data
+ * for testing purposes. It can be run with a php command - php artisan db:seed.  
+ * 
+ */
 class SnailLogTableSeeder extends Seeder
 {
     /**
