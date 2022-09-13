@@ -51,3 +51,19 @@ You can provide the parameters for the snail to attempt escaping the well. The r
 -   f: fatigue factor expressed as a percentage
 
 All parameters are required. All parameters must be between 1 and 100, inclusive.
+
+## Running the app Locally
+
+### Requirements
+
+-   PHP and [Composer](https://getcomposer.org) installed
+-   [Node and NPM](https://nodejs.org/en/) for dependency and package management.
+
+If you are developing on macOS, PHP and Composer can be installed via Homebrew.
+
+### Steps
+
+1. Use `npm install` to download all project dependencies.
+2. Start Laravel's local development server using the Laravel's Artisan CLI serve command: `php artisan serve`
+3. One the development server starts, the application will be accessible at `http://localhost:8000`
+4. You can now make API calls via cURL, Postman, or other methods. An example of the GET endpoint looks like `localhost:8000/api/snailAttempts`
