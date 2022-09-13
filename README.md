@@ -52,7 +52,7 @@ You can provide the parameters for the snail to attempt escaping the well. The r
 
 All parameters are required. All parameters must be between 1 and 100, inclusive.
 
-## Running the app Locally
+## Running the App Locally
 
 ### Requirements
 
