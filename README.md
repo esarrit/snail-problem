@@ -16,7 +16,7 @@ This application follows the Model-View-Controller (MVC) architectural design pa
 
 This application was developed using the PHP web application framework, Laravel. It provides great tools for building robust applications and allows for the implementation of MVC patterns smoothly. See below for more details.
 
-The database for this application is a PostgreSQL database instance hosted on [Heroku](https://www.heroku.com/).
+The database for this application is a PostgreSQL database instance hosted on [Heroku](https://www.heroku.com/). The application itself (web service) is also hosted on Heroku. 
 
 #### Relevant Files for the Model
 
